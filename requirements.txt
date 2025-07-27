@@ -2,3 +2,5 @@ requests
 tqdm
 fast-langdetect
 pandas
+sentence-transformers
+faiss-gpu
