@@ -13,7 +13,7 @@ This repository contains a pipeline for mining high-quality parallel sentence pa
 
 * Evaluation tools with precision, recall, and $F_{0.5}$ score
 
-* Baseline comparison with LASER (CCMatrix-style)
+* Baseline comparison with LASER ([CCMatrix](https://aclanthology.org/2021.acl-long.507.pdf)-style)
 
 ## 📦 Installation
 
