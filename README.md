@@ -11,7 +11,7 @@ This repository contains a pipeline for mining high-quality parallel sentence pa
 
 * Token-level filtering with lemmatization and bilingual dictionary overlap
 
-* Evaluation tools with precision, recall, and F₀.₅ score
+* Evaluation tools with precision, recall, and $F_{0.5}$ score
 
 * Baseline comparison with LASER (CCMatrix-style)
 
