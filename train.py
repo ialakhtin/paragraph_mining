@@ -18,33 +18,23 @@ T = 2
 def to_device(tokens):
     return {key: val.to(device) for key, val in tokens.items()}
 
-# def CalcLoss(en, ru):
-#     matrix = torch.matmul(en, torch.transpose(ru, 0, 1))
-#     matrix -= margin * torch.eye(matrix.size(0)).to(device)
-#     fwd_loss = torch.log_softmax(matrix, dim=0)
-#     bwd_loss = torch.log_softmax(matrix, dim=1)
-#     return -torch.mean(fwd_loss.diag() + bwd_loss.diag())
-
-def CalcLoss(en, ru, logsigmoid):
+def CalcLoss(en, ru):
     matrix = torch.matmul(en, torch.transpose(ru, 0, 1))
-    eye = torch.torch.eye(matrix.size(0)).to(device)
-    pos = matrix.diag() - eye * margin
-    neg = torch.mul(matrix, (1 - eye))
-    pos_loss = - logsigmoid(pos * T)
-    neg_loss = - logsigmoid(-neg * T)
-    return pos_loss.mean() + neg_loss.mean()
+    matrix -= margin * torch.eye(matrix.size(0)).to(device)
+    fwd_loss = torch.log_softmax(matrix, dim=0)
+    bwd_loss = torch.log_softmax(matrix, dim=1)
+    return -torch.mean(fwd_loss.diag() + bwd_loss.diag())
 
 def train_epoch(model, dataloader, optimizer):
     model.train()
     total_loss = 0
-    logsigmoid = torch.nn.LogSigmoid()
     for en_tokens, ru_tokens in tqdm(dataloader):
         optimizer.zero_grad()
         
         en_emb = model(to_device(en_tokens))['sentence_embedding']
         ru_emb = model(to_device(ru_tokens))['sentence_embedding']
         
-        loss = CalcLoss(en_emb, ru_emb, logsigmoid)
+        loss = CalcLoss(en_emb, ru_emb)
 
         total_loss += loss.item()
         loss.backward()
@@ -55,11 +45,10 @@ def train_epoch(model, dataloader, optimizer):
 def evaluate(model, dataloader):
     model.eval()
     total_loss = 0
-    logsigmoid = torch.nn.LogSigmoid()
     for en_tokens, ru_tokens in tqdm(dataloader):
         en_emb = model(to_device(en_tokens))['sentence_embedding']
         ru_emb = model(to_device(ru_tokens))['sentence_embedding']
-        loss = CalcLoss(en_emb, ru_emb, logsigmoid)
+        loss = CalcLoss(en_emb, ru_emb)
 
         total_loss += loss.item()
         
@@ -129,4 +118,4 @@ val_dataloader = DataLoader(
 
 evaluate(lora_model, val_dataloader)
 train(lora_model, train_dataloader, val_dataloader)
-torch.save(lora_model, 'lora_labse3')
+torch.save(lora_model, 'lora_labse2')

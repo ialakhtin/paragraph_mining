@@ -3,4 +3,10 @@ tqdm
 fast-langdetect
 pandas
 sentence-transformers
-faiss-gpu
+faiss-gpu-cu12[fix_cuda]
+nltk
+pandas
+peft
+scikit-learn
+argostranslate
+pymorphy3
