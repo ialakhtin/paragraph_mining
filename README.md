@@ -18,13 +18,13 @@ This repository contains a pipeline for mining high-quality parallel sentence pa
 ## 📦 Installation
 
 ```bash
-git clone https://github.com/your-username/parallel-sentence-mining.git
-cd parallel-sentence-mining
+git clone https://github.com/ialakhtin/paragraph_mining.git
+cd paragraph_mining
 
 # (Recommended) create a virtual environment
 # Use python3.10 or lower
 python -m venv .venv
-source .venv/bin/activate  # or .venv\Scripts\activate on Windows
+source .venv/bin/activate
 
 # Install dependencies
 pip install -r requirements.txt
