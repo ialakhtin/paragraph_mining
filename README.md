@@ -102,3 +102,22 @@ To evaluate the model:
     * Recall
 
     * $F_{0.5}$ score
+
+## Experiments
+Experiments include:
+
+* Model Comparison – LASER vs. LaBSE (with/without margin) vs. Fine-tuned LaBSE
+
+* Filtering Ablation – comparing no filtering, score-only, token-level-only, and combined
+
+* Baseline Comparison – full pipeline vs. LASER with no lexical filtering
+
+## Results Summary
+* LaBSE with margin and full filtering achieves highest $F_{0.5}$.
+
+* Fine-tuning was ineffective due to low number of negatives per batch.
+
+* Token-level filtering helps remove semantically incorrect matches missed by embedding models.
+
+## Citation
+If you use this code or methodology, please cite the original LaBSE and [CCMatrix](https://aclanthology.org/2021.acl-long.507.pdf) papers
